@@ -30,6 +30,13 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'role' => ['required', 'string', 'in:creator,investor'],
             'details' => ['nullable', 'array'],
+        ], [
+            'email.unique' => 'Cet email est déjà utilisé. Veuillez en choisir un autre.',
+            'email.required' => 'L\'adresse email est obligatoire.',
+            'password.required' => 'Le mot de passe est obligatoire.',
+            'password.confirmed' => 'Les mots de passe ne correspondent pas.',
+            'role.required' => 'Veuillez sélectionner un rôle.',
+            'role.in' => 'Le rôle sélectionné n\'est pas valide.',
         ])->validate();
 
         // 2. Préparation des détails à sauvegarder
