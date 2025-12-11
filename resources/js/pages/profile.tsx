@@ -2,6 +2,9 @@ import ProgressBarProfil from '../components/ui/progressBarProfil';
 import DashboardLayout from '../layouts/app/app-sidebar-layout';
 
 // Import des sous-composants
+import { profile } from '@/routes';
+import { type BreadcrumbItem } from '@/types';
+import { Head } from '@inertiajs/react';
 import { ProfileAbout } from '../components/profile/about';
 import { ProfileBudget } from '../components/profile/budget';
 import ProfileFooter from '../components/profile/footer';
@@ -10,6 +13,12 @@ import { ProfileProject } from '../components/profile/project';
 import { ProfileSkills } from '../components/profile/skills';
 import { ProfileSocials } from '../components/profile/social';
 
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Profile',
+        href: profile().url,
+    },
+];
 // --- Composants locaux pour le Header et le Footer de la page ---
 const PageHeader = ({ completion = 60 }) => (
     <div className="mb-8">
@@ -36,7 +45,9 @@ export const ProfilePage = () => {
     const completionPercentage = 60; // Valeur d'exemple
 
     return (
-        <DashboardLayout>
+        <DashboardLayout breadcrumbs={breadcrumbs}>
+            <Head title="Profile" />
+
             <div className="min-h-screen w-full bg-[#DCECD7] p-4 text-black md:p-6">
                 <PageHeader completion={completionPercentage} />
                 <div className="space-y-6">
