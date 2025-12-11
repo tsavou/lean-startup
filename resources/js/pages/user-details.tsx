@@ -2,9 +2,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { mockProfiles } from '@/data/mockProfiles';
 import AppLayout from '@/layouts/app-layout';
-import { Head } from '@inertiajs/react';
+import { addSentRequest, hasSentRequest } from '@/utils/tandemRequests';
+import { Head, Link } from '@inertiajs/react';
 import { Check } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function UserDetails({ id }: { id: string }) {
     const [invitationStatus, setInvitationStatus] = useState<
@@ -26,11 +27,28 @@ export default function UserDetails({ id }: { id: string }) {
         );
     }
 
+    // Vérifier si une demande a déjà été envoyée
+    useEffect(() => {
+        if (profile && hasSentRequest(profile.id)) {
+            setInvitationStatus('sent');
+        }
+    }, [profile]);
+
     const handleInvite = () => {
         if (invitationStatus === 'sent') return;
         setInvitationStatus('loading');
         // Simulation d'un appel API
         setTimeout(() => {
+            // Sauvegarder la demande dans localStorage
+            addSentRequest({
+                id: profile.id,
+                name: profile.name,
+                role: profile.role,
+                avatar: profile.avatarSrc,
+                date: "À l'instant",
+                tags: profile.tags,
+            });
+
             setInvitationStatus('sent');
         }, 800);
     };
@@ -41,20 +59,6 @@ export default function UserDetails({ id }: { id: string }) {
 
             <div className="bg-[#DCECD7] px-4 py-8 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-7xl space-y-8">
-                    {/* Bannière */}
-                    <div className="flex flex-col items-center justify-center gap-1 rounded-xl bg-[#A594FD] px-4 py-6 text-center shadow-sm">
-                        <p className="text-[15px] font-medium text-black">
-                            Votre profil est complété à 60% ajouter une photo
-                            pour augmenter votre chance de match avec votre
-                            futur associé
-                        </p>
-                        <a
-                            href="#"
-                            className="text-[15px] font-medium text-black underline decoration-black underline-offset-2 transition-opacity hover:opacity-75"
-                        >
-                            Compléter mon profil
-                        </a>
-                    </div>
 
                     {/* Carte Principale */}
                     <div className="rounded-[30px] bg-white p-8 shadow-sm">

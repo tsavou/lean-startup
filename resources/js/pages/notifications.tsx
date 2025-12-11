@@ -2,9 +2,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
+import { getSentRequests, removeSentRequest } from '@/utils/tandemRequests';
 import { Head } from '@inertiajs/react';
 import { MessageCircle, UserMinus, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type NotificationType = 'sent' | 'received' | 'matched';
 
@@ -19,6 +20,28 @@ interface User {
 
 export default function Notifications() {
     const [activeTab, setActiveTab] = useState<NotificationType>('received');
+    const [sentRequests, setSentRequests] = useState<User[]>([]);
+
+    // Charger les demandes depuis localStorage
+    useEffect(() => {
+        const requests = getSentRequests();
+        setSentRequests(requests);
+    }, []);
+
+    // Écouter les changements de localStorage (pour mettre à jour quand une nouvelle demande est ajoutée)
+    useEffect(() => {
+        const handleStorageChange = () => {
+            const requests = getSentRequests();
+            setSentRequests(requests);
+        };
+
+        // Écouter les changements dans le même onglet
+        const interval = setInterval(handleStorageChange, 500);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     // Données mockées
     const receivedRequests: User[] = [
@@ -37,17 +60,6 @@ export default function Notifications() {
             avatar: 'https://i.pravatar.cc/150?u=11',
             date: 'Hier',
             tags: ['Dev', 'React'],
-        },
-    ];
-
-    const sentRequests: User[] = [
-        {
-            id: 3,
-            name: 'Sophie Dubois',
-            role: 'UX Designer',
-            avatar: 'https://i.pravatar.cc/150?u=12',
-            date: 'Il y a 3 jours',
-            tags: ['Design', 'Figma'],
         },
     ];
 
@@ -154,6 +166,11 @@ export default function Notifications() {
                                             key={user.id}
                                             user={user}
                                             type="sent"
+                                            onCancel={() => {
+                                                const requests =
+                                                    getSentRequests();
+                                                setSentRequests(requests);
+                                            }}
                                         />
                                     ))
                                 )}
@@ -187,10 +204,17 @@ export default function Notifications() {
 function NotificationCard({
     user,
     type,
+    onCancel,
 }: {
     user: User;
     type: NotificationType;
+    onCancel?: () => void;
 }) {
+    const handleCancel = () => {
+        removeSentRequest(user.id);
+        onCancel?.();
+    };
+
     return (
         <div className="flex flex-col items-center justify-between gap-6 rounded-[20px] bg-white p-6 shadow-sm transition-shadow hover:shadow-md md:flex-row">
             <div className="flex flex-col items-center gap-4 md:flex-row">
@@ -242,6 +266,7 @@ function NotificationCard({
 
                 {type === 'sent' && (
                     <Button
+                        onClick={handleCancel}
                         variant="outline"
                         className="h-10 rounded-full border-gray-200 px-4 text-sm font-medium text-gray-500 hover:border-red-200 hover:bg-gray-50 hover:text-red-500"
                     >
