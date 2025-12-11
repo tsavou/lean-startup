@@ -1,21 +1,20 @@
 import ProgressBarProfil from '../components/ui/progressBarProfil';
 import DashboardLayout from '../layouts/app/app-sidebar-layout';
 
-// Import des sous-composants
+import { ProfileAbout } from '@/components/profile/about';
+import { ProfileBudget } from '@/components/profile/budget';
+import { ProfilePhoto } from '@/components/profile/photo';
+import { ProfileProject } from '@/components/profile/project';
+import { ProfileSkills } from '@/components/profile/skills';
+import { ProfileSocials } from '@/components/profile/social';
 import { profile } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import { ProfileAbout } from '../components/profile/about';
-import { ProfileBudget } from '../components/profile/budget';
 import ProfileFooter from '../components/profile/footer';
-import { ProfilePhoto } from '../components/profile/photo';
-import { ProfileProject } from '../components/profile/project';
-import { ProfileSkills } from '../components/profile/skills';
-import { ProfileSocials } from '../components/profile/social';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Profile',
+        title: 'Profil',
         href: profile().url,
     },
 ];
