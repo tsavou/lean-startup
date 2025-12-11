@@ -1,3 +1,5 @@
+import { login, register } from '@/routes';
+import { Link } from '@inertiajs/react';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './button';
@@ -35,12 +37,24 @@ const Navbar = () => {
                         >
                             Tarifs
                         </a>
-                        <Button
-                            variant="secondary"
-                            className="px-4 py-2 text-sm"
-                        >
-                            Connexion
-                        </Button>
+                        <div className="flex items-center space-x-4">
+                            <Link href={login()}>
+                                <Button
+                                    variant="secondary"
+                                    className="px-4 py-2 text-sm cursor-pointer"
+                                >
+                                    Connexion
+                                </Button>
+                            </Link>
+                            <Link href={register()}>
+                                <Button
+                                    variant="primary"
+                                    className="px-4 py-2 text-sm cursor-pointer"
+                                >
+                                    Inscription
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
 
                     {/* Mobile menu button */}
@@ -71,10 +85,17 @@ const Navbar = () => {
                         >
                             Tarifs
                         </a>
-                        <div className="mt-4">
-                            <Button variant="primary" className="w-full">
-                                Commencer
-                            </Button>
+                        <div className="mt-4 space-y-2">
+                            <Link href={login()} className="block">
+                                <Button variant="secondary" className="w-full cursor-pointer">
+                                    Connexion
+                                </Button>
+                            </Link>
+                            <Link href={register()} className="block">
+                                <Button variant="primary" className="w-full cursor-pointer">
+                                    Inscription
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
