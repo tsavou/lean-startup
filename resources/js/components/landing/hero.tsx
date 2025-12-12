@@ -56,13 +56,13 @@ const Hero = () => {
                 <div className="relative flex aspect-video items-center justify-center bg-gray-50">
                     {role === 'entrepreneur' ? (
                         <img
-                            src="/images/entrepreneur.png"
+                            src="/Demo2.png"
                             alt="Dashboard Entrepreneur"
                             className="h-full w-full object-cover"
                         />
                     ) : (
                         <img
-                            src="/images/investisseur.png"
+                            src="/Demo.png"
                             alt="Dashboard Investisseur"
                             className="h-full w-full object-cover"
                         />
