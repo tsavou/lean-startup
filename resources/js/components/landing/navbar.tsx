@@ -12,9 +12,13 @@ const Navbar = () => {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-20 items-center justify-between">
                     <div className="flex flex-shrink-0 items-center">
-                        <span className="text-2xl font-black tracking-wider uppercase">
-                            TANDEEM
-                        </span>
+                        <Link href="/">
+                            <img
+                                src="/tandeem_logo.png"
+                                alt="Tandeem"
+                                className="h-10 w-auto"
+                            />
+                        </Link>
                     </div>
 
                     {/* Desktop Menu */}
@@ -41,7 +45,7 @@ const Navbar = () => {
                             <Link href={login()}>
                                 <Button
                                     variant="secondary"
-                                    className="px-4 py-2 text-sm cursor-pointer"
+                                    className="cursor-pointer px-4 py-2 text-sm"
                                 >
                                     Connexion
                                 </Button>
@@ -49,7 +53,7 @@ const Navbar = () => {
                             <Link href={register()}>
                                 <Button
                                     variant="primary"
-                                    className="px-4 py-2 text-sm cursor-pointer"
+                                    className="cursor-pointer px-4 py-2 text-sm"
                                 >
                                     Inscription
                                 </Button>
@@ -87,12 +91,18 @@ const Navbar = () => {
                         </a>
                         <div className="mt-4 space-y-2">
                             <Link href={login()} className="block">
-                                <Button variant="secondary" className="w-full cursor-pointer">
+                                <Button
+                                    variant="secondary"
+                                    className="w-full cursor-pointer"
+                                >
                                     Connexion
                                 </Button>
                             </Link>
                             <Link href={register()} className="block">
-                                <Button variant="primary" className="w-full cursor-pointer">
+                                <Button
+                                    variant="primary"
+                                    className="w-full cursor-pointer"
+                                >
                                     Inscription
                                 </Button>
                             </Link>

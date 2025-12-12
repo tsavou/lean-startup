@@ -18,12 +18,12 @@ import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Explorer',
         href: dashboard(),
         icon: LayoutGrid,
     },
     {
-        title: 'Profile',
+        title: 'Profil',
         href: profile(),
         icon: User,
     },

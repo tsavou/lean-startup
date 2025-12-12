@@ -73,26 +73,6 @@ export default function Login({
                             </div>
                         )}
 
-                        {/* Global Error Alert */}
-                        {Object.keys(form.errors).length > 0 && (
-                            <div className="rounded-lg border-2 border-red-500 bg-red-50 p-4">
-                                <div className="flex flex-col gap-2">
-                                    <p className="font-semibold text-red-800">
-                                        Des erreurs ont été détectées :
-                                    </p>
-                                    <ul className="list-inside list-disc space-y-1 text-sm text-red-700">
-                                        {Object.entries(form.errors).map(
-                                            ([field, message]) => (
-                                                <li key={field}>
-                                                    {message as string}
-                                                </li>
-                                            ),
-                                        )}
-                                    </ul>
-                                </div>
-                            </div>
-                        )}
-
                         {/* Form */}
                         <form
                             onSubmit={submit}

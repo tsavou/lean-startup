@@ -14,7 +14,7 @@ export const Button = ({
     onClick,
 }: ButtonProps) => {
     const baseStyle =
-        'px-6 py-3 rounded-full font-bold transition-all duration-200 border-2 border-black flex items-center justify-center';
+        'cursor-pointer px-6 py-3 rounded-full font-bold transition-all duration-200 border-2 border-black flex items-center justify-center';
     const variants = {
         primary: 'bg-black text-white hover:bg-[#333]',
         secondary: 'bg-white text-black hover:bg-[#DCECD7]',

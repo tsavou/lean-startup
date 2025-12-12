@@ -193,30 +193,6 @@ export default function Register() {
 
                         <RegisterStepIndicator currentStep={step} />
 
-                        {/* Global Error Alert */}
-                        {Object.keys(form.errors).length > 0 && (
-                            <div className="mx-auto w-full max-w-3xl rounded-lg border-2 border-red-500 bg-red-50 p-4">
-                                <div className="flex flex-col gap-2">
-                                    <p className="font-semibold text-red-800">
-                                        Des erreurs ont été détectées :
-                                    </p>
-                                    <ul className="list-inside list-disc space-y-1 text-sm text-red-700">
-                                        {Object.entries(form.errors).map(
-                                            ([field, message]) => (
-                                                <li key={field}>
-                                                    {message as string}
-                                                </li>
-                                            ),
-                                        )}
-                                    </ul>
-                                    <p className="mt-2 text-xs text-red-600">
-                                        Veuillez corriger les erreurs ci-dessus
-                                        pour continuer.
-                                    </p>
-                                </div>
-                            </div>
-                        )}
-
                         {/* Form */}
                         <div className="mx-auto w-full max-w-3xl">
                             <form
